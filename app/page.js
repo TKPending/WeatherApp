@@ -1,10 +1,13 @@
+
 import React from 'react'
+import SearchBar from '@/components/SearchBar'
 import BackgroundGif from "@/components/BackgroundGif";
 
 export default function Home() {
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <h1 className="text-7xl">Home Page</h1>
+    <main className="flex min-h-screen min-w-screen flex-col items-center justify-between p-24">
+      {/* <h1>Homepage</h1> */}
+      <SearchBar />
       <BackgroundGif />
     </main>
   )
