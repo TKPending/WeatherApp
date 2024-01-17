@@ -2,11 +2,15 @@
 
 import { useState } from "react";
 import SearchHistory from "./SearchHistory";
+import { ApiClient } from "@/utils/ApiClient";
 
-const SearchBar = () => {
+const SearchBar = ({setWeatherData}) => {
     const [searchText, setSearchText] = useState("");
     const [checkSearch, setCheckSearch] = useState(true);
     const [renderHistory, setRenderHistory] = useState(false);
+
+    // GET()
+    const apiClient = new ApiClient;
 
     // Update Text
     const handleSearchText = (event) => {
@@ -31,7 +35,7 @@ const SearchBar = () => {
     }
 
     // Handle Enter
-    const handleSubmit = (event) => {
+    const handleSubmit = async (event) => {
         event.preventDefault();
 
         if (searchText === "") {
@@ -42,6 +46,9 @@ const SearchBar = () => {
             }, 2000);
         }
         setSearchText(searchText);
+        const response = await apiClient.getRequest(searchText);
+        setWeatherData(response.daily);
+
         updateSearchHistory(searchText);
 
         // Handle API logic for cities not found
