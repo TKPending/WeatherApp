@@ -1,20 +1,25 @@
 import React from 'react'
 
-const BackgroundGif = () => {
+const BackgroundGif = ({selectedDay}) => {
+  console.log(selectedDay)
 
   function backgroundChange(weather) {
-    if (weatherinfo == Rain) {
-    document.body.style.backgroundImage = "url(rain3.gif)";
-    } else if (weatherinfo == Clouds) {
-    document.body.style.backgroundImage = "url(cloud.gif)";
-    } else if (weatherinfo == Clear) {
-    document.body.style.backgroundImage = "url(sky3.gif)";
+    if (weather == "Rain") {
+    document.body.style.backgroundImage = "url(https://pin.it/1mIULf2xT)";
+    } else if (weather == "Clouds") {
+    document.body.style.backgroundImage = "url(https://i.gifer.com/7RtV.gif)";
+    } else if (weather == "Clear") {
+    document.body.style.backgroundImage = "url(https://media.giphy.com/media/u01ioCe6G8URG/giphy.gif)";
     } else {
-    document.body.style.backgroundImage= "url(background.gif)";
+    document.body.style.backgroundImage= "url(https://unsplash.com/photos/body-of-water-lHXU9TgGHEA)";
     }
   }
 
-  backgroundChange(weather);
+  // backgroundChange(selectedDay.weather);
+
+  if (selectedDay) {
+    backgroundChange(selectedDay.weather);
+  }
 
   return (
     <div className=''>

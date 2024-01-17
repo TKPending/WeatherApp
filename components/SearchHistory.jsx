@@ -12,7 +12,7 @@ const SearchHistory = ({setRenderHistory, setSearchText}) => {
     const searchHistory = getSearchHistory ? JSON.parse(getSearchHistory) : [];
     
     setCurrentSearchHistory(searchHistory);
-  }, [currentSearchHistory]);  // This is causing the warning
+  }, []);  // This is causing the warning
 
 
   // Recent 5 searches
