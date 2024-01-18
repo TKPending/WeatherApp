@@ -1,31 +1,25 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react';
 
-const BackgroundGif = ({selectedDay}) => {
-  console.log(selectedDay)
+const BackgroundGif = ({ weather }) => {
+  const [backgroundUrl, setBackgroundUrl] = useState('');
 
-  function backgroundChange(weather) {
-    if (weather == "Rain") {
-    document.body.style.backgroundImage = "url(https://pin.it/1mIULf2xT)";
-    } else if (weather == "Clouds") {
-    document.body.style.backgroundImage = "url(https://i.gifer.com/7RtV.gif)";
-    } else if (weather == "Clear") {
-    document.body.style.backgroundImage = "url(https://media.giphy.com/media/u01ioCe6G8URG/giphy.gif)";
-    } else {
-    document.body.style.backgroundImage= "url(https://unsplash.com/photos/body-of-water-lHXU9TgGHEA)";
-    }
-  }
+  useEffect(() => {
+    const setBackgroundImage = () => {
+      if (weather === 'Rain') {
+        setBackgroundUrl('url(https://pin.it/1mIULf2xT)');
+      } else if (weather === 'Clouds') {
+        setBackgroundUrl('url(https://pin.it/1mIULf2xT)');
+      } else if (weather === 'Clear') {
+        setBackgroundUrl('url(https://pin.it/1mIULf2xT)');
+      } else {
+        setBackgroundUrl('url(https://pin.it/1mIULf2xT)');
+      }
+    };
 
-  // backgroundChange(selectedDay.weather);
+    setBackgroundImage();
+  }, [weather]);
 
-  if (selectedDay) {
-    backgroundChange(selectedDay.weather);
-  }
+  return <div style={{ backgroundImage: backgroundUrl, backgroundSize: 'cover' }} />;
+};
 
-  return (
-    <div className=''>
-      
-    </div>
-  )
-}
-
-export default BackgroundGif
+export default BackgroundGif;
