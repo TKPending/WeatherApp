@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 
-const SearchHistory = ({setRenderHistory, setSearchText}) => {
+const SearchHistory = ({setRenderHistory, setSearchText, pressedEnter}) => {
   const [currentSearchHistory, setCurrentSearchHistory] = useState([]);
   
 
@@ -12,7 +12,7 @@ const SearchHistory = ({setRenderHistory, setSearchText}) => {
     const searchHistory = getSearchHistory ? JSON.parse(getSearchHistory) : [];
     
     setCurrentSearchHistory(searchHistory);
-  }, []);  // This is causing the warning
+  }, [pressedEnter]);  // This is causing the warning
 
 
   // Recent 5 searches
@@ -42,7 +42,7 @@ const SearchHistory = ({setRenderHistory, setSearchText}) => {
 
   return (
     currentSearchHistory.length > 0 && 
-        <div className="h-80 mt-2 w-full border-2">
+        <div className="h-80 mt-2 w-full border-2 z-10 bg-white border-lg">
         {currentSearchHistory.length > 0 &&
             recentSearches.map((location, index) => (
             <div key={index} onClick={() => autoFillSearch(location)} className="flex w-full h-16 items-center border-b-2 hover:bg-red-300">

@@ -11,3 +11,7 @@ html, body {
     width: '100%';
 }
 
+
+#weather-card1 {
+    background-color: rgba(0, 0, 0, 0.75);
+}
