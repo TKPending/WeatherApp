@@ -5,6 +5,6 @@ export class ApiClient {
     async getRequest(location) {
         const response = await GET(location);
         
-        return response.data;
+        return response ? response.data : null;
     }
 }
