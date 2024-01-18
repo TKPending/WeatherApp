@@ -17,6 +17,7 @@ const CarouselSlide = ({index, day, date, weatherData}) => {
     temp: {
       min: data.temp.min,
       max: data.temp.max,
+      currentTemp: data.temp.day
     },
     "wind_speed": data.wind_speed,
     summary: data.summary,
@@ -26,7 +27,7 @@ const CarouselSlide = ({index, day, date, weatherData}) => {
       icon: data.weather[0].icon
     }
   }
-
+console.log(data)
 
   return (
   <div className="w-full m-5">
@@ -36,6 +37,7 @@ const CarouselSlide = ({index, day, date, weatherData}) => {
       {/* Enter weather card */}
       <WeatherCard 
         day={dayData.day}
+        currentTemp={dayData.temp.currentTemp}
         min={dayData.temp.min}
         max={dayData.temp.max}
         summary={dayData.summary}
