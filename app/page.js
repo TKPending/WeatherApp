@@ -14,12 +14,13 @@ export default function Home() {
   
 
   return (
-    <main className="flex min-h-screen min-w-screen flex-col items-center justify-between">
+    <main className="flex max-h-screen max-w-screen flex-col items-center">
       {/* <h1>Homepage</h1> */}
       <SearchBar setWeatherData={setWeatherData} />
       <BackgroundGif selectedDay={selectedDay} />
 
       {Object.keys(weatherData).length !== 0 && <DayCarousel weatherData={weatherData} setSelectedDay={setSelectedDay} />}
+      
     </main>
   )
 }
