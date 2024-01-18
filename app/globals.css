@@ -2,15 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
-body {
-    background-image: 'url(https://pin.it/1mIULf2xT)' !important;
-}
-
 html, body {
     height: '100%';
     width: '100%';
 }
-
 
 #weather-card1 {
     background-color: rgba(0, 0, 0, 0.75);

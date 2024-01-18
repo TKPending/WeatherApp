@@ -88,6 +88,7 @@ const SearchBar = ({ setWeatherData }) => {
     <div className="w-2/5 h-16 mt-8 p-2 border border-black rounded-lg z-10">
       {checkSearch && (
         <form
+          id={"search-bar"}
           className="flex w-full h-full bg-green z-0"
           onSubmit={handleSubmit}
         >
@@ -108,7 +109,7 @@ const SearchBar = ({ setWeatherData }) => {
         </form>
       )}
       {!checkSearch && (
-        <div className="flex w-full h-full bg-red-500 text-center flex items-center justify-center z-0 transition-500">
+        <div className="flex w-full h-full bg-red-500 text-center items-center justify-center z-0 transition-500">
           <p className="text-white text-4xl font-semibold">
             Location doesn't exist
           </p>
