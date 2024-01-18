@@ -3,10 +3,8 @@ import { FaArrowLeft, FaArrowRight } from 'react-icons/fa';
 import WeatherCard from './WeatherCard';
 import BackgroundGif from './BackgroundGif';
 
-const CarouselSlide = ({date, weatherData, city, index}) => {
-  console.log(weatherData)
+const CarouselSlide = ({weatherData, city, index}) => {
   const data = weatherData[0];
-  console.log(data)
 
   if (!data) {
     return <div>loading</div>  
@@ -35,8 +33,8 @@ const CarouselSlide = ({date, weatherData, city, index}) => {
   }
 
   return (
-  <div className="w-full h-full bg-red-500 mr-4">
-    <div className="bg-gray-400 bg-opacity-30 p-4 rounded-md shadow-md flex flex-col items-center h-2/3 w-[242px]">
+  <div className="w-full h-full mr-4">
+    <div className=" p-4 rounded-md shadow-md flex flex-col items-center h-2/3 w-[242px]">
     <h2 className="text-xl font-bold text-black mb-2">{city}</h2>
       <p className="font-mono text-black">{index === 0 ? "Today" : ""}</p>
       {/* Enter weather card */}
@@ -63,12 +61,10 @@ const DayCarousel = ({weatherData, setSelectedDay, city}) => {
 
   const initialIndex = new Date().getDay();
   const [currentIndex, setCurrentIndex] = useState(0);
-  // const [selectedDay] = useState(weatherData[initialIndex]);
 
   useEffect(() => {
-    // setSelectedDay(weatherData[currentIndex]);
+    setSelectedDay(wData[currentIndex]);
     const slicedArray = wData.slice(currentIndex);
-    console.log(slicedArray);
     setLiveWeatherData(slicedArray)
   }, [currentIndex])
 
@@ -82,15 +78,8 @@ const DayCarousel = ({weatherData, setSelectedDay, city}) => {
   };
 
   const changeSlide = (index) => {
-    console.log(`Changing Index To: ${currentIndex + index}`)
     setCurrentIndex(currentIndex + index)
   }
-
-  console.log("before")
-  liveWeatherData.map((e) => {
-    console.log([e])
-  })
-  console.log("after")
 
   if (!liveWeatherData) return null;
 
@@ -119,7 +108,6 @@ const DayCarousel = ({weatherData, setSelectedDay, city}) => {
             />
           ))}
         </div>
-        {/* <BackgroundGif selectedDay={selectedDay} /> */}
       </div>
   );
 };
