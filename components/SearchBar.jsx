@@ -74,7 +74,7 @@ const SearchBar = ({setWeatherData}) => {
                 </div>
             </form> }
             {!checkSearch && 
-                <div className="flex w-full h-full bg-red-500 text-center flex items-center justify-center z-0 transition-500">
+                <div className="flex w-full h-full bg-red-500 text-center items-center justify-center z-0 transition-500">
                     <p className="text-white text-4xl font-semibold">Please enter a real location</p>
                 </div>
             }
