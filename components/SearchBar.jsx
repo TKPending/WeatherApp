@@ -85,7 +85,7 @@ const SearchBar = ({ setWeatherData }) => {
   };
 
   return (
-    <div className="w-2/5 h-16 p-2 border border-black rounded-lg z-10">
+    <div className="w-2/5 h-16 mt-8 p-2 border border-black rounded-lg z-10">
       {checkSearch && (
         <form
           className="flex w-full h-full bg-green z-0"

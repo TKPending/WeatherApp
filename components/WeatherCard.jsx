@@ -4,7 +4,7 @@ import React from 'react';
 const WeatherCard = ({ day, min, max, summary, weather, description, icon, wind_speed, currentTemp }) => {
 
     return (
-        <div className='flex flex-row items-center justify-center w-full h-screen text-white'>
+        <div className='flex items-center justify-center w-full h-full text-white'>
             {/*weather card */}
             <div id='weather-card1' className='bg-black w-full h-96 flex items-center flex-col rounded-md shadow-md p-2.5 relative'>
                 <div className='flex justify-center items-center flex-col border-b-gray-300'>
