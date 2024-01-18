@@ -3,7 +3,7 @@ import { FaArrowLeft, FaArrowRight } from 'react-icons/fa';
 import WeatherCard from './WeatherCard';
 import BackgroundGif from './BackgroundGif';
 
-const CarouselSlide = ({index, day, date, weatherData}) => {
+const CarouselSlide = ({index, day, date, weatherData, city}) => {
   const data = weatherData;
 
   const timestamp = data.dt;
@@ -32,7 +32,8 @@ console.log(data)
   return (
   <div className="w-full m-5">
     <div className="bg-gray-400 bg-opacity-30 p-4 rounded-md shadow-md flex flex-col items-center">
-      <h2 className="text-xl font-bold text-black mb-2">{day}</h2>
+    <h2 className="text-xl font-bold text-black mb-2">{city}</h2>
+      <h3 className="text-xl font-bold text-black mb-2">{day}</h3>
       <p className="font-mono text-black">{date}</p>
       {/* Enter weather card */}
       <WeatherCard 
@@ -50,7 +51,7 @@ console.log(data)
   </div>
 )};
 
-const DayCarousel = ({weatherData, setSelectedDay}) => {
+const DayCarousel = ({weatherData, setSelectedDay, city}) => {
   const daysOfWeek = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
   const initialIndex = new Date().getDay();
   const [currentIndex, setCurrentIndex] = useState(initialIndex);
@@ -93,6 +94,7 @@ const DayCarousel = ({weatherData, setSelectedDay}) => {
               day={daysOfWeek[(currentIndex + index) % daysOfWeek.length]}
               date={getFormattedDate((currentIndex + index) % daysOfWeek.length)}
               weatherData={weatherData[index]}
+              city={city}
             />
           ))}
         </div>
