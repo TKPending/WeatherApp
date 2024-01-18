@@ -1,4 +1,5 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react';
+
 
 const BackgroundGif = ({selectedDay}) => {
   // console.log(selectedDay)
@@ -15,17 +16,10 @@ const BackgroundGif = ({selectedDay}) => {
     }
   }
 
-  // backgroundChange(selectedDay.weather);
+    setBackgroundImage();
+  }, [weather]);
 
-  if (selectedDay) {
-    backgroundChange(selectedDay.weather);
-  }
+  return <div style={{ backgroundImage: backgroundUrl, backgroundSize: 'cover' }} />;
+};
 
-  return (
-    <div className='absolute'>
-      
-    </div>
-  )
-}
-
-export default BackgroundGif
+export default BackgroundGif;
