@@ -4,12 +4,14 @@ import { useState, useEffect } from "react";
 import SearchHistory from "./SearchHistory";
 import { ApiClient } from "@/utils/ApiClient";
 
-const SearchBar = ({ setWeatherData }) => {
+const SearchBar = ({ setWeatherData, handleClick, handleLanding }) => {
   const [searchText, setSearchText] = useState("");
   const [checkSearch, setCheckSearch] = useState(true);
   const [renderHistory, setRenderHistory] = useState(false);
   const [pressedEnter, setPressedEnter] = useState(false);
+  const [pressedAutoFill, setPressedAutoFill] = useState(false);
 
+  // API Client
   const apiClient = new ApiClient();
 
   // Update Text
@@ -18,7 +20,8 @@ const SearchBar = ({ setWeatherData }) => {
     setSearchText(value);
     if (value.length === 0) {
       setRenderHistory(false);
-      setWeatherData({});
+      handleLanding(true);
+      handleClick()
       return;
     }
     setRenderHistory(true);
@@ -27,7 +30,8 @@ const SearchBar = ({ setWeatherData }) => {
   // Clear Search
   const handleClearSearch = () => {
     setSearchText("");
-    setRenderHistory(false);
+    setRenderHistory(true);
+    handleClick();
   };
 
   // Update local history with search history
@@ -57,7 +61,7 @@ const SearchBar = ({ setWeatherData }) => {
 
   // Handle Enter
   const handleSubmit = async (event) => {
-    event.preventDefault();
+    event?.preventDefault();
 
     if (searchText === "") {
       searchEmpty();
@@ -81,34 +85,43 @@ const SearchBar = ({ setWeatherData }) => {
       searchEmpty();
     }
 
+    handleLanding(false);
     setPressedEnter(false);
   };
 
+  useEffect(() => {
+    if (pressedAutoFill) {
+      handleSubmit();
+      setPressedAutoFill(false);
+    }
+  }, [searchText])
+
   return (
-    <div className="w-2/5 h-16 mt-8 p-2 border border-black rounded-lg z-10">
+    <div className="w-2/5 h-16 mt-8 border border-red-600 bg-red-200 rounded-lg z-10">
       {checkSearch && (
         <form
-          className="flex w-full h-full bg-green z-0"
+          id={"search-bar"}
+          className="flex w-full h-full z-0 overflow-hidden rounded-lg"
           onSubmit={handleSubmit}
         >
           <input
             onChange={handleSearchText}
             value={searchText}
-            className="font-semibold h-full w-4/5 text-center text-2xl outline-none"
+            className="font-semibold h-full w-4/5 text-center text-2xl outline-none bg-white"
             type="text"
             placeholder="Enter a city"
           />
 
           <div
             onClick={handleClearSearch}
-            className="w-1/5 flex justify-center items-center"
+            className="w-1/5 flex justify-center items-center hover:bg-red-600 border-lg bg-red-400 h-full"
           >
-            <p className="text-4xl hover:scale-105 hover:text-orange-900">X</p>
+            <p className="text-4xl text-white ">X</p>
           </div>
         </form>
       )}
       {!checkSearch && (
-        <div className="flex w-full h-full bg-red-500 text-center flex items-center justify-center z-0 transition-500">
+        <div className="flex w-full h-full bg-red-400 text-center items-center justify-center z-0 transition-500">
           <p className="text-white text-4xl font-semibold">
             Location doesn't exist
           </p>
@@ -120,6 +133,7 @@ const SearchBar = ({ setWeatherData }) => {
           setRenderHistory={setRenderHistory}
           setSearchText={setSearchText}
           pressedEnter={pressedEnter}
+          setPressedAutoFill={setPressedAutoFill}
         />
       )}
     </div>

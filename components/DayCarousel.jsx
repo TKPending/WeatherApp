@@ -3,11 +3,8 @@ import { FaArrowLeft, FaArrowRight } from 'react-icons/fa';
 import WeatherCard from './WeatherCard';
 import BackgroundGif from './BackgroundGif';
 
-const CarouselSlide = ({date, weatherData, city, index}) => {
-  console.log(weatherData)
+const CarouselSlide = ({weatherData, city, date, index, currentWeatherData }) => {
   const data = weatherData[0];
-  console.log(data)
-
   if (!data) {
     return <div>loading</div>  
   }
@@ -16,7 +13,7 @@ const CarouselSlide = ({date, weatherData, city, index}) => {
   const createDate = new Date(timestamp * 1000); // Convert seconds to milliseconds
 
   // Get the day of the week as a string
-  const dayOfWeek = new Intl.DateTimeFormat('en-US', { weekday: 'long' }).format(createDate);
+  const dayOfWeek = new Intl.DateTimeFormat('en-GB', { weekday: 'long' }).format(createDate);
 
   const dayData = {
     day: dayOfWeek,
@@ -34,11 +31,23 @@ const CarouselSlide = ({date, weatherData, city, index}) => {
     }
   }
 
+  const currentDay = [
+    "Sunday",
+    "Monday",
+    "Tuesday",
+    "Wednesday",
+    "Thursday",
+    "Friday",
+    "Saturday",
+  ][new Date().getDay()];
+
+  console.log(currentWeatherData)
+
   return (
-  <div className="w-full h-full bg-red-500 mr-4">
-    <div className="bg-gray-400 bg-opacity-30 p-4 rounded-md shadow-md flex flex-col items-center h-2/3 w-[242px]">
-    <h2 className="text-xl font-bold text-black mb-2">{city}</h2>
-      <p className="font-mono text-black">{index === 0 ? "Today" : ""}</p>
+  <div className="w-full h-full mr-4">
+    <div id={`${dayData.day === currentDay && currentWeatherData.length === 8 ? 'background' : ""}`} className="p-4 rounded-md flex flex-col  shadow-md items-center h-2/3 w-[242px]  ">
+    <h2 className="text-xl font-bold text-black mb-2">{`${dayData.day === currentDay && currentWeatherData.length === 8 ? date : ''}`}</h2>
+      <p className="absolute top-28 font-mono text-white font-semibold">{dayData.day === currentDay && currentWeatherData.length === 8 ? "Today" : ""}</p>
       {/* Enter weather card */}
       <WeatherCard 
         day={dayData.day}
@@ -51,6 +60,12 @@ const CarouselSlide = ({date, weatherData, city, index}) => {
         icon={dayData.image.icon}
         wind_speed={dayData["wind_speed"]}
         index={index}
+        humidity={data.humidity}
+        uvi={data.uvi}
+        clouds={data.clouds}
+        rain={data.rain}
+        date={date}
+
       />
     </div>
   </div>
@@ -60,15 +75,15 @@ const DayCarousel = ({weatherData, setSelectedDay, city}) => {
   const wData = weatherData;
 
   const [liveWeatherData, setLiveWeatherData] = useState(wData);
-
-  const initialIndex = new Date().getDay();
   const [currentIndex, setCurrentIndex] = useState(0);
-  // const [selectedDay] = useState(weatherData[initialIndex]);
+
+  const daysOfWeek = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+  const initialIndex = new Date().getDay();
+  const [dayIndex, setDayIndex] = useState(initialIndex);
 
   useEffect(() => {
-    // setSelectedDay(weatherData[currentIndex]);
+    setSelectedDay(wData[currentIndex]);
     const slicedArray = wData.slice(currentIndex);
-    console.log(slicedArray);
     setLiveWeatherData(slicedArray)
   }, [currentIndex])
 
@@ -82,44 +97,44 @@ const DayCarousel = ({weatherData, setSelectedDay, city}) => {
   };
 
   const changeSlide = (index) => {
-    console.log(`Changing Index To: ${currentIndex + index}`)
     setCurrentIndex(currentIndex + index)
+    const newIndex = (dayIndex + index + daysOfWeek.length) % daysOfWeek.length;
+    setDayIndex((prevIndex) => (newIndex < initialIndex ? newIndex + daysOfWeek.length : newIndex));
   }
-
-  console.log("before")
-  liveWeatherData.map((e) => {
-    console.log([e])
-  })
-  console.log("after")
 
   if (!liveWeatherData) return null;
 
   return (
-      <div className="h-2/4 w-3/4 mt-40">
+      <div className="h-2/4 w-3/4 mt-10">
+        {liveWeatherData.length !== 8 &&
         <button
-          className="absolute left-0 top-1/2 transform -translate-y-1/2 text-white bg-red-500 py-2 px-4 rounded-md hover:bg-red-600 bg-opacity-50 z-10"
+          className="absolute left-10 top-1/2 transform -translate-y-1/2 text-white bg-red-500 py-2 px-4 rounded-md hover:bg-red-600 bg-opacity-50 z-10"
           onClick={() => changeSlide(-1)}
         >
           <FaArrowLeft />
-        </button>
+        </button>}
+
+        {liveWeatherData.length !== 1 &&
         <button
-          className="absolute right-0 top-1/2 transform -translate-y-1/2 text-white bg-red-500 py-2 px-4 rounded-md hover:bg-red-600 bg-opacity-50 z-10"
+          className="absolute right-10 top-1/2 transform -translate-y-1/2 text-white bg-red-500 py-2 px-4 rounded-md hover:bg-red-600 bg-opacity-50 z-10"
           onClick={() => changeSlide(1)}
         >
           <FaArrowRight />
-        </button>
+        </button>}
+
         <div className="flex overflow-hidden transition-transform ease-in-out duration-300">
           {liveWeatherData?.map((eachDay, index) => (
             <CarouselSlide
               key={index}
               index={index}
-              date={getFormattedDate((currentIndex + index) % liveWeatherData.length)}
+              date={getFormattedDate((dayIndex + index) % liveWeatherData.length)}
               weatherData={[eachDay]}
               city={city}
+              currentIndex={currentIndex}
+              currentWeatherData={liveWeatherData}
             />
           ))}
         </div>
-        {/* <BackgroundGif selectedDay={selectedDay} /> */}
       </div>
   );
 };
