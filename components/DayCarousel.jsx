@@ -41,8 +41,6 @@ const CarouselSlide = ({weatherData, city, date, index, currentWeatherData }) =>
     "Saturday",
   ][new Date().getDay()];
 
-  console.log(currentWeatherData)
-
   return (
   <div className="w-full h-full mr-4">
     <div id={`${dayData.day === currentDay && currentWeatherData.length === 8 ? 'background' : ""}`} className="p-4 rounded-md flex flex-col  shadow-md items-center h-2/3 w-[242px]  ">
