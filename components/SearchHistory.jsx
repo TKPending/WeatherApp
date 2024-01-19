@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 
-const SearchHistory = ({setRenderHistory, setSearchText, pressedEnter}) => {
+const SearchHistory = ({setRenderHistory, setSearchText, pressedEnter, setPressedAutoFill}) => {
   const [currentSearchHistory, setCurrentSearchHistory] = useState([]);
   
 
@@ -38,6 +38,7 @@ const SearchHistory = ({setRenderHistory, setSearchText, pressedEnter}) => {
   const autoFillSearch = (location) => {
     setSearchText(location);
     setRenderHistory(false);
+    setPressedAutoFill(true);
   }
 
   return (
@@ -49,8 +50,8 @@ const SearchHistory = ({setRenderHistory, setSearchText, pressedEnter}) => {
                 <div className="w-4/5 h-full flex items-center justify-center">
                     <p className="text-2xl">{location}</p>
                 </div>
-                <div className="w-1/5 h-full flex items-center justify-center">
-                    <p onClick={(event) => removeSearchHistory(index, event)} className="text-2xl hover:scale-105 hover:text-orange-900">X</p>
+                <div onClick={(event) => removeSearchHistory(index, event)} className="w-1/5 h-full flex items-center bg-red-200 hover:bg-red-400 justify-center">
+                    <p className="text-2xl hover:scale-105 hover:text-orange-900">X</p>
                 </div>
             </div>
             ))}

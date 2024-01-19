@@ -5,7 +5,6 @@ import BackgroundGif from './BackgroundGif';
 
 const CarouselSlide = ({weatherData, city, index}) => {
   const data = weatherData[0];
-
   if (!data) {
     return <div>loading</div>  
   }
@@ -34,9 +33,9 @@ const CarouselSlide = ({weatherData, city, index}) => {
 
   return (
   <div className="w-full h-full mr-4">
-    <div className=" p-4 rounded-md shadow-md flex flex-col items-center h-2/3 w-[242px]">
+    <div className="p-4 rounded-md flex flex-col items-center h-2/3 w-[242px]">
     <h2 className="text-xl font-bold text-black mb-2">{city}</h2>
-      <p className="font-mono text-black">{index === 0 ? "Today" : ""}</p>
+      <p className="absolute top-28 font-mono text-black">{index === 0 ? "Today" : ""}</p>
       {/* Enter weather card */}
       <WeatherCard 
         day={dayData.day}
@@ -49,6 +48,11 @@ const CarouselSlide = ({weatherData, city, index}) => {
         icon={dayData.image.icon}
         wind_speed={dayData["wind_speed"]}
         index={index}
+        humidity={data.humidity}
+        uvi={data.uvi}
+        clouds={data.clouds}
+        rain={data.rain}
+
       />
     </div>
   </div>
@@ -84,15 +88,15 @@ const DayCarousel = ({weatherData, setSelectedDay, city}) => {
   if (!liveWeatherData) return null;
 
   return (
-      <div className="h-2/4 w-3/4 mt-40">
+      <div className="h-2/4 w-3/4 mt-10">
         <button
-          className="absolute left-0 top-1/2 transform -translate-y-1/2 text-white bg-red-500 py-2 px-4 rounded-md hover:bg-red-600 bg-opacity-50 z-10"
+          className="absolute left-10 top-1/2 transform -translate-y-1/2 text-white bg-red-500 py-2 px-4 rounded-md hover:bg-red-600 bg-opacity-50 z-10"
           onClick={() => changeSlide(-1)}
         >
           <FaArrowLeft />
         </button>
         <button
-          className="absolute right-0 top-1/2 transform -translate-y-1/2 text-white bg-red-500 py-2 px-4 rounded-md hover:bg-red-600 bg-opacity-50 z-10"
+          className="absolute right-10 top-1/2 transform -translate-y-1/2 text-white bg-red-500 py-2 px-4 rounded-md hover:bg-red-600 bg-opacity-50 z-10"
           onClick={() => changeSlide(1)}
         >
           <FaArrowRight />
