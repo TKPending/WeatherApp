@@ -1,14 +1,13 @@
 import React from 'react';
 import { useState } from 'react';
 
-const WeatherCard = ({ day, min, max, weather, summary, description, icon, wind_speed, currentTemp, humidity, uvi, clouds, rain }) => {
-console.log(rain)
+const WeatherCard = ({ day, min, max, weather, summary, description, icon, wind_speed, currentTemp, humidity, uvi, clouds, rain, date }) => {
     const [isHidden, setIsHidden] = useState(true);
 const handleButtonClick = () => {
     setIsHidden(!isHidden); 
 }
     return (
-        <div className='flex items-center justify-center w-full h-full text-white'>
+        <div className='flex items-center justify-center w-full h-full text-white opacity-100'>
             {/*weather card */}
             <div id='weather-card1' className='bg-black w-full h-auto flex items-center flex-col rounded-md shadow-md p-2.5 relative'>
                 <div className='flex justify-center items-center flex-col border-b-gray-300'>

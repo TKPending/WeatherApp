@@ -15,3 +15,7 @@ background: radial-gradient(circle, rgba(249,99,99,1) 51%, rgba(255,255,255,1) 7
 #weather-card1 {
     background-color: rgba(0, 0, 0, 0.75);
 }
+
+#background{ 
+    background-color: rgba(249,99,99,0.5);
+}

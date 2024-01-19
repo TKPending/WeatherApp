@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import SearchHistory from "./SearchHistory";
 import { ApiClient } from "@/utils/ApiClient";
 
-const SearchBar = ({ setWeatherData, handleClick }) => {
+const SearchBar = ({ setWeatherData, handleClick, handleLanding }) => {
   const [searchText, setSearchText] = useState("");
   const [checkSearch, setCheckSearch] = useState(true);
   const [renderHistory, setRenderHistory] = useState(false);
@@ -20,6 +20,7 @@ const SearchBar = ({ setWeatherData, handleClick }) => {
     setSearchText(value);
     if (value.length === 0) {
       setRenderHistory(false);
+      handleLanding(true);
       handleClick()
       return;
     }
@@ -29,7 +30,7 @@ const SearchBar = ({ setWeatherData, handleClick }) => {
   // Clear Search
   const handleClearSearch = () => {
     setSearchText("");
-    setRenderHistory(false);
+    setRenderHistory(true);
     handleClick();
   };
 
@@ -84,6 +85,7 @@ const SearchBar = ({ setWeatherData, handleClick }) => {
       searchEmpty();
     }
 
+    handleLanding(false);
     setPressedEnter(false);
   };
 

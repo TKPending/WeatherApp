@@ -12,6 +12,7 @@ export default function Home() {
 
   const [weatherData, setWeatherData] = useState({});
   const [selectedDay, setSelectedDay] = useState(0);
+  const [landingPage, setLandingPage] = useState(true);
 
   // Hide background
   const hideBackground = () => {
@@ -28,12 +29,16 @@ export default function Home() {
     hideBackground();
   }
 
+  const handleLanding = (value) => {
+    setLandingPage(value);
+  }
+
   return (
     <body className="flex max-h-screen max-w-screen flex-col items-center">
       {/* <h1>Homepage</h1> */}
-      <SearchBar setWeatherData={setWeatherData} handleClick={handleXClick} />
+      <SearchBar setWeatherData={setWeatherData} handleClick={handleXClick} handleLanding={handleLanding} />
 
-      <LandingPage />
+      {landingPage && <LandingPage />}
 
       {selectedDay != 0 && <BackgroundGif selectedDay={selectedDay} />}
 
