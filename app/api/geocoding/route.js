@@ -1,6 +1,6 @@
 import axios from "axios";
 import { NextResponse } from "next/server";
-
+export const runtime = "edge";
 export async function GET(userInput) {
     const APIKEY = process.env.OPENWEATHER_API_KEY;
     try {
