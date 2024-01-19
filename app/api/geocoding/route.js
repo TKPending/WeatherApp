@@ -20,8 +20,10 @@ export async function GET(userInput) {
             return weatherResponse;
         } catch (error) {
             console.error(error);
+            return NextResponse.error();
         }
     } catch (error) {
         console.error(error);
+        return NextResponse.error();
     }
 }
