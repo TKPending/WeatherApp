@@ -5,7 +5,7 @@ export const runtime = "edge";
 
 export const dynamic = "force-dynamic"
 export async function GET(userInput) {
-    const APIKEY = process.env.OPENWEATHER_API_KEY;
+    const APIKEY = "63c61b0d757c73aaf542a88a2d209c56"; // process.env.OPENWEATHER_API_KEY;
 
     try {
         const response = await axios.get(`https://api.openweathermap.org/geo/1.0/direct?q=${userInput}&limit=5&appid=${APIKEY}`);
