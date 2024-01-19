@@ -4,7 +4,9 @@ import React from 'react'
 import SearchBar from '@/components/SearchBar'
 import BackgroundGif from "@/components/BackgroundGif";
 import DayCarousel from '@/components/DayCarousel'; 
+import WeatherCard from '@/components/WeatherCard';
 import { useState, useEffect } from 'react';
+import LandingPage from '@/components/LandingPage';
 
 export default function Home() {
 
@@ -30,6 +32,8 @@ export default function Home() {
     <body className="flex max-h-screen max-w-screen flex-col items-center">
       {/* <h1>Homepage</h1> */}
       <SearchBar setWeatherData={setWeatherData} handleClick={handleXClick} />
+
+      <LandingPage />
 
       {selectedDay != 0 && <BackgroundGif selectedDay={selectedDay} />}
 

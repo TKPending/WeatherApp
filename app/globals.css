@@ -7,6 +7,11 @@ html, body {
     width: '100%';
 }
 
+.bg-gradient {
+    background: rgb(249,99,99);
+background: radial-gradient(circle, rgba(249,99,99,1) 51%, rgba(255,255,255,1) 76%);
+}
+
 #weather-card1 {
     background-color: rgba(0, 0, 0, 0.75);
 }
