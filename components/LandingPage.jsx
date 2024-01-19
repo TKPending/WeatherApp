@@ -1,0 +1,14 @@
+import React from 'react'
+
+const LandingPage = () => {
+  return (
+    <div className=''>
+        <div className='p-5 m-5 px-60 mt-40 text-white bg-gradient'>
+            <h1 className='font-thin text-3xl pb-9'>Welcome to Weather App!</h1>
+            <p className='font-thin text-xl'>Enter your city in the search bar above!</p>
+        </div>
+    </div>
+  )
+}
+
+export default LandingPage
