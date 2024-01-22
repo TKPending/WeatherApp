@@ -1,4 +1,4 @@
-import { GET } from "@/app/api/geocoding/route";
+import { GET } from "@/app/api/geocoding/route"; 
 
 export class ApiClient {
 
